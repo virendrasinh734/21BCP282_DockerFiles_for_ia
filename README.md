@@ -50,14 +50,6 @@ Finally, we’ll start a project by using the `yarn start` command:
 
 ## Docker Compose Explanation
 
-services:
-  slackfrontend:
-    - Service for the Slack frontend.
-    - build: Specifies build instructions.
-      - context: .: Build context set to the current directory.
-      - dockerfile: Dockerfile.reactUI: Specifies Dockerfile for building the image.
-    - ports: Maps container port 3000 to host port 3000.
-    - depends_on: Service depends on the db service.
 
 slackfrontend: 
   - Service for the Slack frontend.
