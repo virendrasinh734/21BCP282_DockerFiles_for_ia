@@ -30,3 +30,16 @@ EXPOSE 3000
 Finally, we’ll start a project by using the yarn start command:
 
 CMD ["yarn","start"]
+
+
+
+## React Dockerfile Explanation
+
+- `FROM node:16`: Specifies the base image as Node.js version 16.
+- `WORKDIR /app`: Sets the working directory inside the container to `/app`.
+- `COPY ./package.json ./package.json`: Copies `package.json` from the host to `/app` in the container.
+- `COPY ./public ./public`: Copies the `public` directory from the host to `/app/public` in the container.
+- `COPY ./src ./src`: Copies the `src` directory from the host to `/app/src` in the container.
+- `RUN yarn install`: Installs dependencies listed in `package.json`.
+- `EXPOSE 3000`: Exposes port 3000 on the container.
+- `CMD ["yarn","start"]`: Sets the default command to start the React UI application using `yarn start`.
