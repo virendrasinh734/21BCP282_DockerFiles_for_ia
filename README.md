@@ -44,3 +44,34 @@ Finally, we’ll start a project by using the `yarn start` command:
 - `RUN yarn install`: Installs dependencies listed in `package.json`.
 - `EXPOSE 3000`: Exposes port 3000 on the container.
 - `CMD ["yarn","start"]`: Sets the default command to start the React UI application using `yarn start`.
+
+
+
+
+## Docker Compose Explanation
+
+slackfrontend: 
+  - Service for the Slack frontend.
+  - build: Specifies build instructions.
+    - context: .: Build context set to the current directory.
+    - dockerfile: Dockerfile.reactUI: Specifies Dockerfile for building the image.
+  - ports: Maps container port 3000 to host port 3000.
+  - depends_on: Service depends on the db service.
+
+nodebackend: 
+  - Service for the Node backend.
+  - build: Specifies build instructions.
+    - context: ./server: Build context set to the server directory.
+    - dockerfile: Dockerfile.node: Specifies Dockerfile for building the image.
+  - ports: Maps container port 9000 to host port 9000.
+  - depends_on: Service depends on the db service.
+
+db: 
+  - Service for MongoDB.
+  - volumes: Mounts a volume named slack_db to persist data.
+  - image: mongo:latest: Specifies the Docker image to use (latest version of MongoDB).
+  - ports: Maps container port 27017 to host port 27017.
+  - volumes: Defines named volume slack_db for persisting MongoDB data.
+
+This Docker Compose configuration sets up three services: slackfrontend, nodebackend, and db, where slackfrontend and nodebackend depend on db (MongoDB). Each service has specific build instructions, port mappings, and dependencies. Additionally, a named volume slack_db is defined for persisting MongoDB data.
+
